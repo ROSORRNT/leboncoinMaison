@@ -11,12 +11,24 @@ function Get-LBCMaison {
         [int]$PrixMax,
 
         [Parameter()]
-        [string]$TypeBien = "maison" # vente_maison dans l'URL LeBonCoin
+        [ValidateRange(0,100)]
+        [int]$Rayon = 10 # Rayon en km
     )
 
     # Construction de l'URL
     $baseUrl = "https://www.leboncoin.fr/recherche"
     $category = "ventes_immobilieres"
+    $typeBien = "vente_maison"
     
-    # À implémenter : construction de l'URL avec les paramètres
+    # Construction des paramètres
+    $searchParams = @{
+        category = $category
+        locations = $Ville
+        price_min = $PrixMin
+        price_max = $PrixMax
+        real_estate_type = $typeBien
+        search_radius = $Rayon # Rayon de recherche
+    }
+
+    # À implémenter : construction de l'URL complète avec les paramètres
 }
